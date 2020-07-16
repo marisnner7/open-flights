@@ -1,2 +1,11 @@
 class Review < ApplicationRecord
+  belongs_to :airline
+
+  def slugify
+    self.slug = name.parameterize
+  end
+
+  def avg_score
+    @reviews.average(:score).round(2).to_f
+  end
 end
