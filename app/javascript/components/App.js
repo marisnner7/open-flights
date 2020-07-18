@@ -6,7 +6,7 @@ import Airline from './Airline/Airline'
 const App = () => {
     return ( 
         <Switch>
-            <Route exact path='/' component={Airline}/>
+            <Route exact path='/' component={Airlines}/>
             <Route exact path='/airlines/:slug' component={Airline}/>
         </Switch>
     )
