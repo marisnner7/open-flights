@@ -10,9 +10,5 @@ const App = () => {
 					<Route exact path="/:slug" component={Airline} />
 
 				</Switch>
-    )
-}
-
-
 
 export default App

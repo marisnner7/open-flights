@@ -24,6 +24,25 @@ const Airline = (props) => {
 
     </div>
   )
+
+
+
+const Airline = (props) => {
+    return(
+        <Card>
+            <AirlineLogo>
+                <img src={props.attributes.image_url} alt={props.attributes.name}/>
+            </AirlineLogo>
+                <AirlineName>
+                    {props.attributes.name}
+                    {props.attributes.avg_score}
+                </AirlineName>
+                <LinkWrapper>
+                    <Link to={"/airlines/" + props.slug}>View Here</Link>
+                </LinkWrapper>
+
+        </Card>
+    )
 }
 
 export default Airline

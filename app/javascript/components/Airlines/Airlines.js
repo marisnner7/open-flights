@@ -4,7 +4,7 @@ import Airline from './Airline'
 
 const Airlines = () => {
   const [airlines, setAirlines] = useState([])
-  
+
   useEffect( () => {
     axios.get('/api/v1/airlines.json')
     .then( resp => setAirlines(resp.data.data) )
@@ -20,7 +20,7 @@ const Airlines = () => {
       )
     })
   }
-  
+
   console.log(airlines)
  return (
     <div className="home">
@@ -33,6 +33,7 @@ const Airlines = () => {
       </div>
     </div>
   )
-}
+
+
 
 export default Airlines
