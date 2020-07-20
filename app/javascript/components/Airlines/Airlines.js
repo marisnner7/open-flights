@@ -33,7 +33,6 @@ const Airlines = () => {
       </div>
     </div>
   )
-
-
+}
 
 export default Airlines

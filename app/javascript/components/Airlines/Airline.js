@@ -27,22 +27,23 @@ const Airline = (props) => {
 
 
 
-const Airline = (props) => {
-    return(
-        <Card>
-            <AirlineLogo>
-                <img src={props.attributes.image_url} alt={props.attributes.name}/>
-            </AirlineLogo>
-                <AirlineName>
-                    {props.attributes.name}
-                    {props.attributes.avg_score}
-                </AirlineName>
-                <LinkWrapper>
-                    <Link to={"/airlines/" + props.slug}>View Here</Link>
-                </LinkWrapper>
+  const Airline = (props) => {
+      return(
+          <Card>
+              <AirlineLogo>
+                  <img src={props.attributes.image_url} alt={props.attributes.name}/>
+              </AirlineLogo>
+                  <AirlineName>
+                      {props.attributes.name}
+                      {props.attributes.avg_score}
+                  </AirlineName>
+                  <LinkWrapper>
+                      <Link to={"/airlines/" + props.slug}>View Here</Link>
+                  </LinkWrapper>
 
-        </Card>
-    )
+          </Card>
+      )
+  }
 }
 
 export default Airline
