@@ -1,35 +1,37 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Airline from './Airline'
 
 const Airlines = () => {
   const [airlines, setAirlines] = useState([])
-
-  useEffect(() => {
-   
+  
+  useEffect( () => {
     axios.get('/api/v1/airlines.json')
-    .then(resp => {
-      setAirlines(resp.data.data) 
+    .then( resp => setAirlines(resp.data.data) )
+    .catch( resp => console.log(resp) )
+  }, [])
+
+  let grid
+  if (airlines && airlines.length > 0) {
+    grid = airlines.map( (airline, index) => {
+      console.log(airlines)
+      return(
+        <Airline key={index} attributes={airline.attributes} />
+      )
     })
-    .catch(resp => console.log(resp))
-  }, [airlines.length])
-
-  const list = airlines.map( item => {
-    return (<li key={item.attributes.name}>{item.attributes.name}</li>)
-  })
-
-  return(
-    <Fragment>
-      <div className="home">
-        <div className="header">
-          <h1>OpenFlights</h1>
-          <p className="subheader">Honest, unbiased airline reviews. Share your experience.</p>
-        </div>
-        <div className="grid">
-          AIRLINES GRID GOES HERE
-          <ul>{list}</ul>
-        </div>
+  }
+  
+  console.log(airlines)
+ return (
+    <div className="home">
+      <div className="header">
+        <h1>OpenFlights</h1>
+        <p className="subheader">Honest, unbiased airline reviews. Share your experience.</p>
+      </div>
+      <div className="grid">
+        {grid}
+      </div>
     </div>
-    </Fragment>
   )
 }
 
