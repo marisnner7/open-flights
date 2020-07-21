@@ -1,7 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Airline from './Airline'
+import styled from 'styled-components'
 
+
+const Home = styled.div`
+  text-align:center;
+` 
+const Header = styled.div`
+  padding:100px 100px 10px 100px;
+  
+  h1 {
+    font-size:42px;
+  }
+`
+const Subheader = styled.p`
+  font-weight:300;
+  font-size:26px;
+`
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  width: 100%;
+  padding:20px;
+`
 const Airlines = () => {
   const [airlines, setAirlines] = useState([])
 
@@ -14,24 +37,22 @@ const Airlines = () => {
   let grid
   if (airlines && airlines.length > 0) {
     grid = airlines.map( (airline, index) => {
-      console.log(airlines)
       return(
         <Airline key={index} attributes={airline.attributes} />
       )
     })
   }
 
-  console.log(airlines)
  return (
-    <div className="home">
-      <div className="header">
+    <Home>
+      <Header>
         <h1>OpenFlights</h1>
-        <p className="subheader">Honest, unbiased airline reviews. Share your experience.</p>
-      </div>
-      <div className="grid">
+        <Subheader>Honest, unbiased airline reviews. Share your experience.</Subheader>
+      </Header>
+      <Grid>
         {grid}
-      </div>
-    </div>
+      </Grid>
+    </Home>
   )
 }
 
