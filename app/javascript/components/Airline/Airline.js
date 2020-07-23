@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import Header from './Header'
-import Review from './Review'
+//import Review from './Review'
+import ReviewForm from './ReviewForm'
 
+const Wrapper = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+`
 const Column = styled.div`
   background: #fff; 
-  max-width: 50%;
-  width: 50%;
-  float: left; 
   height: 100vh;
-  overflow-x: scroll;
-  overflow-y: scroll; 
   overflow: scroll;
+  
+  &:last-child {
+    background: #000;
+  }
+`
+
+const Main = styled.div`
+  padding-left: 50px;
 `
 
 const Airline = (props) => {
@@ -35,21 +45,25 @@ const Airline = (props) => {
   },[])
 
   return(
-    <div className="wrapper">
+    <Wrapper>
+      {
+        loaded && 
+      <Fragment>
         <Column>
-          {
-          loaded && 
-            <Header
-              attributes={airline.data.attributes}
-              reviews={airline.included}
-            />
-          }
-          <div className="review">new review</div>
+          <Main>
+              <Header
+                attributes={airline.data.attributes}
+                reviews={airline.included}
+              />
+            <div className="reviews">new review</div>
+          </Main>
         </Column>
         <Column>
-         [review form here]
+          <ReviewForm/>
         </Column>
-    </div>
+      </Fragment>
+     }
+    </Wrapper>
   )
 }
 
