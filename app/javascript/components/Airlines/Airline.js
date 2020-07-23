@@ -42,13 +42,14 @@ const Airline = (props) => {
   return (
     <Card>
       <AirlineLogo>
-        <img src={image_url} alt={name} width="50"/>
+        <img src={props.attributes.image_url} alt={props.attributes.name} width="50px" />
       </AirlineLogo>
       <AirlineName>
-        {name}
+        {props.attributes.name}
+        {props.attributes.avg_score}
       </AirlineName>
       <LinkWrapper>
-        <Link to={"/" + slug}>View Airline</Link>
+        <Link to={`/airlines/${props.attributes.slug}`}>View Airline</Link>
       </LinkWrapper>
     </Card>
   )
