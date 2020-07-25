@@ -1,4 +1,3 @@
-
 import React, { Fragment } from "react";
 import styled from 'styled-components'
 
@@ -105,26 +104,37 @@ const RatingBoxTitle = styled.div`
   font-weight: bold;
 `
 
+const Error = styled.div`
+  width: 100%;
+  color: rgb(255, 80, 44);
+  border: 1px solid rgb(255, 80, 44);
+  border-radius: 4px;
+  margin-top: 8px;
+  text-align:center;
+  padding: 4px;
+`
+
+
 const ReviewForm = (props) =>{
   const ratingOptions = [5,4,3,2,1].map((score, index) => {
-    return 
-      // <Fragment key={index}>
-      //   <input type="radio" value={score} checked={props.review.score == score} onChange={()=>console.log('onChange')} name="rating" id={`rating-${score}`}/>
-      //   <label onClick={props.setRating.bind(this, score)}></label>
-      // </Fragment>
-    
+    return (
+      <Fragment key={index}>
+        <input type="radio" value={score} checked={props.review.score == score} onChange={()=>console.log('onChange')} name="rating" id={`rating-${score}`}/>
+        <label onClick={props.setRating.bind(this, score)}></label>
+      </Fragment>
+    )
   })
 
   return (
     <ReviewWrapper>
       <form onSubmit={props.handleSubmit}>
         <ReviewHeadline>Have An Experience with {props.name}? Add Your Review!</ReviewHeadline>
-        {/* <Field>
+        <Field>
           <input onChange={props.handleChange} type="text" name="title" placeholder="Review Title" value={props.review.title}/>
-        </Field> */}
-        {/* <Field>
+        </Field>
+        <Field>
           <input onChange={props.handleChange} type="text" name="description" placeholder="Review Description" value={props.review.description}/>
-        </Field> */}
+        </Field>
         <Field>
           <RatingContainer>
             <RatingBoxTitle>Rate This Airline</RatingBoxTitle>
@@ -134,6 +144,10 @@ const ReviewForm = (props) =>{
           </RatingContainer>
         </Field>
         <SubmitBtn type="Submit">Create Review</SubmitBtn>
+        { 
+          props.error && 
+          <Error>{props.error}</Error>
+        }
       </form>
     </ReviewWrapper>
   )
