@@ -30,7 +30,7 @@ class Api::V1::ReviewsController < ApplicationController
     private
 
     def airline
-        @airline ||= Airline.find(params[airline_id])
+       @airline = Airline.find(params[:airline_id])
     end
 
 
