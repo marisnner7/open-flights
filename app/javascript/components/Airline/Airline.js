@@ -62,9 +62,7 @@ const Airline = (props) => {
     const airline_id = airline.data.id
     axios.post('/api/v1/reviews', {review, airline_id})
     .then(resp => {
-      const included = [...airline, included, resp.data]
-      setAirline({...airline, included})
-      setReview({title: '', description: '', score: 0})
+      
     })
     .catch( resp => {})
   }
@@ -73,6 +71,26 @@ const Airline = (props) => {
     e.preventDefault()  
     setReview({ ...review, score })
   }
+
+  let total, average = 0
+  let airlineReviews
+
+  if (airline.reviews && airline.reviews.length > 0) {
+    total = airline.reviews.reduce((total, review) => total + review.score, 0)
+    average = total > 0 ? (parseFloat(total) / parseFloat(airline.reviews.length)) : 0
+
+  airlineReviews = airline.reviews.map( (review, index) => {
+    return (
+      <Review 
+        key={index}
+        id={review.id}
+        attributes={review}
+        handleDestroy={handleDestroy}
+      />
+    )
+  })
+}
+
 
 
   return(
@@ -86,7 +104,7 @@ const Airline = (props) => {
                 attributes={airline.data.attributes}
                 reviews={airline.included}
               />
-            <div className="reviews">new review</div>
+            {airlineReviews}
           </Main>
         </Column>
         <Column>
