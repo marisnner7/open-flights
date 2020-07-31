@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Header from './Header'
 //import Review from './Review'
 import ReviewForm from './ReviewForm'
+import Review from './Review'
 
 const Wrapper = styled.div`
   margin-left: auto;
@@ -25,7 +26,7 @@ const Main = styled.div`
   padding-left: 50px;
 `
 
-const Airline = (props) => {
+  const Airline = (props) => {
   const [airline, setAirline] = useState({})
   const [review, setReview] = useState({})
   const [loaded, setLoaded] = useState(false)
@@ -50,7 +51,6 @@ const Airline = (props) => {
 
     setReview(Object.assign({}, review, {[e.target.name]: e.target.value}))
     
-    console.log('review: ', review)
   }
 
   const handleSubmit = (e) => {
@@ -79,7 +79,23 @@ const Airline = (props) => {
     total = airline.reviews.reduce((total, review) => total + review.score, 0)
     average = total > 0 ? (parseFloat(total) / parseFloat(airline.reviews.length)) : 0
 
+    let reviews
+    if (airlines.included.length > 0) {
+      reviews = airlines.included.map( (review, index) => {
+        return (
+          <Review 
+            key={index} 
+            title={review.attributes.title} 
+            description={review.attributes.description} 
+            score={review.attributes.score} 
+          />
+        )
+      })
+    }
+
+
   airlineReviews = airline.reviews.map( (review, index) => {
+    
     return (
       <Review 
         key={index}
@@ -90,7 +106,6 @@ const Airline = (props) => {
     )
   })
 }
-
 
 
   return(
@@ -104,7 +119,11 @@ const Airline = (props) => {
                 attributes={airline.data.attributes}
                 reviews={airline.included}
               />
-            {airlineReviews}
+              <Review>
+                
+                
+              </Review>
+       
           </Main>
         </Column>
         <Column>
