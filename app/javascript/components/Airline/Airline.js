@@ -2,28 +2,27 @@ import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import Header from './Header'
-//import Review from './Review'
 import ReviewForm from './ReviewForm'
 import Review from './Review'
 
-const Wrapper = styled.div`
-  margin-left: auto;
-  margin-right: auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-`
-const Column = styled.div`
-  background: #fff; 
-  height: 100vh;
-  overflow: scroll;
-  
-  &:last-child {
-    background: #000;
-  }
-`
+  const Wrapper = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  `
+  const Column = styled.div`
+    background: #fff; 
+    height: 100vh;
+    overflow: scroll;
+    
+    &:last-child {
+      background: #000;
+    }
+  `
 
-const Main = styled.div`
-  padding-left: 50px;
+  const Main = styled.div`
+    padding-left: 50px;
 `
 
   const Airline = (props) => {
@@ -46,13 +45,15 @@ const Main = styled.div`
   },[])
 
   
+  //update the review object in our website
   const handleChange = (e) => {
     e.preventDefault()
 
     setReview(Object.assign({}, review, {[e.target.name]: e.target.value}))
-    
+    console.log('review:', review)
   }
 
+//submit create a new review
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -62,50 +63,53 @@ const Main = styled.div`
     const airline_id = airline.data.id
     axios.post('/api/v1/reviews', {review, airline_id})
     .then(resp => {
-      
+      const included = [ ...airline.included, resp.data.data ]
+      setAirline({...airline, included })
+      setReview({ title: ' ', description: '', score: 0})
     })
-    .catch( resp => {})
+    .catch( resp => console.log(resp))
   }
-
+  //set score
   const setRating = (score, e) => {
     e.preventDefault()  
     setReview({ ...review, score })
   }
 
-  let total, average = 0
-  let airlineReviews
 
-  if (airline.reviews && airline.reviews.length > 0) {
-    total = airline.reviews.reduce((total, review) => total + review.score, 0)
-    average = total > 0 ? (parseFloat(total) / parseFloat(airline.reviews.length)) : 0
+  // let total, average = 0
+  // let airlineReviews
 
-    let reviews
-    if (airlines.included.length > 0) {
-      reviews = airlines.included.map( (review, index) => {
-        return (
-          <Review 
-            key={index} 
-            title={review.attributes.title} 
-            description={review.attributes.description} 
-            score={review.attributes.score} 
-          />
-        )
-      })
-    }
+  // if (airline.reviews && airline.reviews.length > 0) {
+  //   total = airline.reviews.reduce((total, review) => total + review.score, 0)
+  //   average = total > 0 ? (parseFloat(total) / parseFloat(airline.reviews.length)) : 0
 
+  //   let reviews
+  //   if (airlines.included.length > 0) {
+  //     reviews = airlines.included.map( (review, index) => {
+  //       return (
+  //         <Review 
+  //           key={index} 
+  //           title={review.attributes.title} 
+  //           description={review.attributes.description} 
+  //           score={review.attributes.score} 
+  //         />
+  //       )
+  //     })
+  //   }
 
-  airlineReviews = airline.reviews.map( (review, index) => {
-    
-    return (
-      <Review 
-        key={index}
-        id={review.id}
-        attributes={review}
-        handleDestroy={handleDestroy}
-      />
-    )
-  })
-}
+  let reviews
+  if(loaded && airline.included){
+    reviews = airline.included.map( (item, index) => {
+      console.log('mapping', item)
+      return (
+        <Review 
+          key={index}
+          attributes={item.attributes}          
+        />
+      )
+    })
+  }
+
 
 
   return(
@@ -119,12 +123,8 @@ const Main = styled.div`
                 attributes={airline.data.attributes}
                 reviews={airline.included}
               />
-              <Review>
-                
-                
-              </Review>
-       
           </Main>
+          {reviews}
         </Column>
         <Column>
           <ReviewForm
@@ -140,6 +140,6 @@ const Main = styled.div`
      }
     </Wrapper>
   )
-}
 
+}
 export default Airline
