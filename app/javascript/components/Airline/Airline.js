@@ -60,7 +60,7 @@ import Review from './Review'
     const csrfToken = document.querySelector('[name=csrf-token]').content
     axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
     //post to api
-    const airline_id = airline.data.id
+    const airline_id = parseInt(airline.data.id) 
     axios.post('/api/v1/reviews', {review, airline_id})
     .then(resp => {
       const included = [ ...airline.included, resp.data.data ]
