@@ -29,7 +29,7 @@ const Review = (props) => {
   return (
     <Card>
       <RatingContainer>
-        {score}
+        <Rating score={score}/>
       </RatingContainer>
       <Title>
        {title}
