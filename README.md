@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-  ![Alt text](app/assets/images/open.gif)
+  ![Alt text](https://github.com/marisnner7/open-flights/blob/master/app/assets/images/open.gif)
 <br>
 <br>
   OpenFlights. A review tool for airlines companies
