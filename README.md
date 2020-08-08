@@ -1,9 +1,9 @@
 <h1 align="center">
 <br>
-  <img src="YOUR_LOGO_URL" alt="YOUR_PROJECT_NAME" width="120">
+  ![Alt text](app/assets/images/Peek 2020-08-08 00-56.gif)
 <br>
 <br>
-  OpenFlights. A review tool for airlines company
+  OpenFlights. A review tool for airlines companies
 </h1>
 
 <p align="center">A little description about your project</p>
@@ -14,17 +14,10 @@
   </a>
 </p>
 
-[//]: # (Add your gifs/images here:)
-<div>
-  <img src="IMAGE_1_URL" alt="demo" height="425">
-  <img src="IMAGE_2_URL" alt="demo" height="425">
-</div>
 
 <hr />
 
-
-
-- ⚛️ **Rails** — Backend with crud pratice and apiREST
+-  **Rails** — Backend with crud pratice and REST API
 - ⚛️ **React.JS** — A lib that provides front-end
 
 ## Getting started
