@@ -1,10 +1,8 @@
-<h1 align="center">
-<br>
   ![Alt text](https://github.com/marisnner7/open-flights/blob/master/app/assets/images/open.gif)
-<br>
-<br>
+
+
   OpenFlights. A review tool for airlines companies
-</h1>
+
 
 <p align="center">A little description about your project</p>
 
